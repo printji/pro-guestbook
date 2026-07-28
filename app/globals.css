@@ -4,7 +4,40 @@
 
 html,
 body {
-  background-color: #f9fafb;
+  background: #fff5fb;
+  color: #2b1736;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: #ff9dcc;
+  color: #fff;
+}
+
+.y2k-shell {
+  background:
+    radial-gradient(circle at 6% 8%, rgba(255, 255, 255, 0.95) 0 3%, transparent 14%),
+    radial-gradient(circle at 96% 22%, rgba(216, 184, 255, 0.75) 0 8%, transparent 25%),
+    radial-gradient(circle at 7% 72%, rgba(255, 199, 222, 0.85) 0 9%, transparent 27%),
+    linear-gradient(145deg, #fff7fd 0%, #fceeff 45%, #f2ebff 100%);
+}
+
+.y2k-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.46) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.46) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.glossy-card {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.64));
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 30px rgba(196, 95, 166, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.sparkle {
+  filter: drop-shadow(0 3px 4px rgba(186, 79, 160, 0.2));
 }
 
 @keyframes shimmer {
@@ -17,7 +50,7 @@ body {
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background: linear-gradient(90deg, #fbe7f4 0%, #f1dcfa 20%, #fbe7f4 40%, #fbe7f4 100%);
   background-size: 400px 100%;
   animation: shimmer 1.4s ease infinite;
 }

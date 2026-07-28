@@ -44,76 +44,82 @@ export default function WritePage() {
   }
 
   return (
-    <main className="min-h-screen max-w-[430px] mx-auto bg-[#f9fafb] relative pb-40">
-      <header className="flex items-center gap-2 px-6 pt-12 pb-4">
+    <main className="y2k-shell y2k-grid min-h-screen max-w-[430px] mx-auto relative pb-40 overflow-hidden">
+      <div aria-hidden="true" className="absolute -top-10 -left-12 size-40 rounded-full bg-[#ffc1df]/45 blur-3xl" />
+      <div aria-hidden="true" className="absolute top-72 -right-16 size-40 rounded-full bg-[#cfb8ff]/40 blur-3xl" />
+      <header className="relative flex items-center gap-2 px-5 pt-8 pb-3">
         <Link
           href="/"
           aria-label="뒤로가기"
-          className="size-10 -ml-2 rounded-full flex items-center justify-center text-lg"
+          className="size-10 rounded-2xl glossy-card flex items-center justify-center text-2xl font-light text-[#6d4175]"
         >
           ‹
         </Link>
-        <h1 className="text-xl font-bold">메시지 남기기</h1>
+        <div>
+          <p className="text-[9px] font-extrabold tracking-[0.2em] uppercase text-[#ba689c]">say something sweet</p>
+          <h1 className="text-xl font-black tracking-[-0.05em] text-[#44234f]">메시지 남기기</h1>
+        </div>
       </header>
 
-      <form onSubmit={handleSubmit} className="px-6 pt-4 flex flex-col gap-6">
-        <div className="bg-primary/5 rounded-card p-5 flex gap-4 items-start">
-          <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-primary">
-            ✎
+      <form onSubmit={handleSubmit} className="relative px-5 pt-5 flex flex-col gap-5">
+        <div className="glossy-card rounded-[28px] p-5 flex gap-4 items-start overflow-hidden relative">
+          <span aria-hidden="true" className="absolute -right-2 -top-3 text-5xl opacity-20">✦</span>
+          <div className="size-11 rounded-2xl bg-gradient-to-br from-[#ff92c5] to-[#ad89ef] shadow-[0_6px_15px_rgba(200,103,180,.28)] flex items-center justify-center shrink-0 text-white text-lg">
+            ♡
           </div>
           <div className="flex flex-col gap-0.5">
-            <p className="font-bold text-sm text-primary">당신의 이야기를 들려주세요</p>
-            <p className="text-[13px] text-primary/70">
-              소중한 방문에 감사드립니다. 정성 어린 메시지는 큰 힘이 됩니다.
+            <p className="font-black text-sm text-[#7a3e79]">오늘의 한마디를 남겨줘!</p>
+            <p className="text-[13px] font-medium leading-relaxed text-[#9d7197]">
+              귀엽고 재밌는 얘기라면 뭐든 좋아요. 우리만의 작은 기록을 채워봐요.
             </p>
           </div>
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-[13px] font-bold uppercase tracking-wide">
-            이름
+          <label htmlFor="name" className="ml-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#875d89]">
+            Your name
           </label>
           <input
             id="name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="성함을 입력해주세요"
-            className="w-full bg-white border border-gray-200 rounded-card shadow-sm px-5 py-4 text-[15px] outline-none focus:border-primary"
+            placeholder="닉네임을 알려줘"
+            className="w-full glossy-card rounded-[20px] px-5 py-4 text-[15px] font-medium text-[#503653] outline-none placeholder:text-[#c4a7c2] focus:ring-2 focus:ring-[#f5a5ce]"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="message" className="text-[13px] font-bold uppercase tracking-wide">
-            메시지
+          <label htmlFor="message" className="ml-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#875d89]">
+            Love note
           </label>
           <textarea
             id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="따뜻한 한마디를 남겨주세요"
+            placeholder="오늘 있었던 재밌는 일, 하고 싶은 말 모두 좋아!"
             rows={5}
-            className={`w-full bg-white rounded-card shadow-sm px-5 py-4 text-[15px] outline-none resize-none ${
-              messageEmpty && error ? "border-2 border-accent" : "border border-gray-200 focus:border-primary"
+            className={`w-full glossy-card rounded-[20px] px-5 py-4 text-[15px] font-medium text-[#503653] outline-none resize-none placeholder:text-[#c4a7c2] focus:ring-2 focus:ring-[#f5a5ce] ${
+              messageEmpty && error ? "ring-2 ring-[#ff85b9]" : ""
             }`}
           />
           {messageEmpty && error && (
-            <p className="text-xs text-accent font-medium flex items-center gap-1">⚠ 내용을 입력해주세요</p>
+            <p className="text-xs text-[#d65991] font-bold flex items-center gap-1">⚠ 내용을 입력해주세요</p>
           )}
         </div>
 
         {error && !messageEmpty && (
-          <p className="text-xs text-accent font-medium -mt-3">⚠ {error}</p>
+          <p className="text-xs text-[#d65991] font-bold -mt-3">⚠ {error}</p>
         )}
 
         <div className="fixed bottom-0 left-0 right-0">
-          <div className="max-w-[430px] mx-auto bg-gradient-to-t from-[#f9fafb] via-[#f9fafb] to-transparent pt-12 pb-12 px-6">
+          <div className="max-w-[430px] mx-auto bg-gradient-to-t from-[#fff4fb] via-[#fff4fb]/95 to-transparent pt-12 pb-8 px-5">
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-primary text-white font-bold rounded-card h-14 flex items-center justify-center gap-2 shadow-[0_10px_15px_-3px_rgba(91,127,222,0.3),0_4px_6px_-2px_rgba(91,127,222,0.15)] disabled:opacity-60"
+              className="w-full bg-gradient-to-r from-[#fa75b3] via-[#e877c9] to-[#a980ed] text-white font-black rounded-[20px] h-14 flex items-center justify-center gap-2 shadow-[0_11px_20px_rgba(198,87,170,.32),inset_0_1px_0_rgba(255,255,255,.42)] transition-transform active:scale-[.98] disabled:opacity-60"
             >
-              {submitting ? "남기는 중..." : "남기기 ➤"}
+              {submitting ? "남기는 중..." : "Send my love ♡"}
             </button>
           </div>
         </div>
