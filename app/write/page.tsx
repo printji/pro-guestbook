@@ -44,86 +44,69 @@ export default function WritePage() {
   }
 
   return (
-    <main className="y2k-shell y2k-grid min-h-screen max-w-[430px] mx-auto relative pb-40 overflow-hidden">
-      <div aria-hidden="true" className="absolute -top-10 -left-12 size-40 rounded-full bg-[#ffc1df]/45 blur-3xl" />
-      <div aria-hidden="true" className="absolute top-72 -right-16 size-40 rounded-full bg-[#cfb8ff]/40 blur-3xl" />
-      <header className="relative flex items-center gap-2 px-5 pt-8 pb-3">
-        <Link
-          href="/"
-          aria-label="뒤로가기"
-          className="size-10 rounded-2xl glossy-card flex items-center justify-center text-2xl font-light text-[#6d4175]"
-        >
-          ‹
-        </Link>
-        <div>
-          <p className="text-[9px] font-extrabold tracking-[0.2em] uppercase text-[#ba689c]">say something sweet</p>
-          <h1 className="text-xl font-black tracking-[-0.05em] text-[#44234f]">메시지 남기기</h1>
-        </div>
-      </header>
-
-      <form onSubmit={handleSubmit} className="relative px-5 pt-5 flex flex-col gap-5">
-        <div className="glossy-card rounded-[28px] p-5 flex gap-4 items-start overflow-hidden relative">
-          <span aria-hidden="true" className="absolute -right-2 -top-3 text-5xl opacity-20">✦</span>
-          <div className="size-11 rounded-2xl bg-gradient-to-br from-[#ff92c5] to-[#ad89ef] shadow-[0_6px_15px_rgba(200,103,180,.28)] flex items-center justify-center shrink-0 text-white text-lg">
-            ♡
+    <main className="phone-shell min-h-screen max-w-[430px] mx-auto relative px-4 py-7">
+      <div className="phone-frame min-h-[calc(100vh-56px)] rounded-[42px] px-4 pt-7 pb-5 flex flex-col">
+        <div aria-hidden="true" className="mx-auto mb-5 h-1.5 w-14 rounded-full bg-[#989082] shadow-inner" />
+        <form onSubmit={handleSubmit} className="lcd-screen rounded-[7px] overflow-hidden flex-1 flex flex-col">
+          <header className="bg-[#5a716a] px-3 py-1.5 flex items-center justify-between text-[#f6f8e9] font-mono text-[10px] tracking-wide">
+            <span>◉ 3G</span><span>NEW MESSAGE</span><span>17:25 ▰▰▰</span>
+          </header>
+          <div className="px-4 py-4 border-b border-[#7c9785]">
+            <p className="font-mono text-[10px] tracking-[0.1em] text-[#597469]">MENU  ›  WRITE</p>
+            <h1 className="mt-1 text-[20px] leading-none font-black tracking-[-0.08em] text-[#284a42]">새 메시지</h1>
           </div>
-          <div className="flex flex-col gap-0.5">
-            <p className="font-black text-sm text-[#7a3e79]">오늘의 한마디를 남겨줘!</p>
-            <p className="text-[13px] font-medium leading-relaxed text-[#9d7197]">
-              귀엽고 재밌는 얘기라면 뭐든 좋아요. 우리만의 작은 기록을 채워봐요.
-            </p>
-          </div>
-        </div>
+          <p className="px-4 py-3 font-mono text-[11px] leading-relaxed text-[#48685c]">누군가의 하루에 작은 알림이 될<br />메시지를 작성해 보세요.</p>
+          <div className="px-4 pb-4 flex flex-col gap-4 flex-1">
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="ml-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#875d89]">
-            Your name
+          <label htmlFor="name" className="font-mono text-[11px] font-bold text-[#35574d]">
+            01. 이름
           </label>
           <input
             id="name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="닉네임을 알려줘"
-            className="w-full glossy-card rounded-[20px] px-5 py-4 text-[15px] font-medium text-[#503653] outline-none placeholder:text-[#c4a7c2] focus:ring-2 focus:ring-[#f5a5ce]"
+            placeholder="닉네임 입력"
+            className="w-full border border-[#789182] bg-[#edf2da] px-3 py-2.5 text-[13px] font-mono text-[#2c4d43] outline-none placeholder:text-[#849b87] focus:ring-1 focus:ring-[#3f7163]"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="message" className="ml-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#875d89]">
-            Love note
+          <label htmlFor="message" className="font-mono text-[11px] font-bold text-[#35574d]">
+            02. 한마디
           </label>
           <textarea
             id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="오늘 있었던 재밌는 일, 하고 싶은 말 모두 좋아!"
+            placeholder="메시지를 입력하세요"
             rows={5}
-            className={`w-full glossy-card rounded-[20px] px-5 py-4 text-[15px] font-medium text-[#503653] outline-none resize-none placeholder:text-[#c4a7c2] focus:ring-2 focus:ring-[#f5a5ce] ${
-              messageEmpty && error ? "ring-2 ring-[#ff85b9]" : ""
+            className={`w-full border border-[#789182] bg-[#edf2da] px-3 py-2.5 text-[13px] font-mono text-[#2c4d43] outline-none resize-none placeholder:text-[#849b87] focus:ring-1 focus:ring-[#3f7163] ${
+              messageEmpty && error ? "ring-2 ring-[#9a5b50]" : ""
             }`}
           />
           {messageEmpty && error && (
-            <p className="text-xs text-[#d65991] font-bold flex items-center gap-1">⚠ 내용을 입력해주세요</p>
+            <p className="text-xs text-[#8e4c3e] font-mono font-bold flex items-center gap-1">! 내용을 입력해주세요</p>
           )}
         </div>
 
         {error && !messageEmpty && (
-          <p className="text-xs text-[#d65991] font-bold -mt-3">⚠ {error}</p>
+          <p className="text-xs text-[#8e4c3e] font-mono font-bold -mt-3">! {error}</p>
         )}
 
-        <div className="fixed bottom-0 left-0 right-0">
-          <div className="max-w-[430px] mx-auto bg-gradient-to-t from-[#fff4fb] via-[#fff4fb]/95 to-transparent pt-12 pb-8 px-5">
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full bg-gradient-to-r from-[#fa75b3] via-[#e877c9] to-[#a980ed] text-white font-black rounded-[20px] h-14 flex items-center justify-center gap-2 shadow-[0_11px_20px_rgba(198,87,170,.32),inset_0_1px_0_rgba(255,255,255,.42)] transition-transform active:scale-[.98] disabled:opacity-60"
-            >
-              {submitting ? "남기는 중..." : "Send my love ♡"}
+          </div>
+          <div className="mt-auto bg-[#5a716a] px-3 py-2 flex justify-between text-[#f6f8e9] font-mono text-[10px]">
+            <Link href="/">◀ 취소</Link>
+            <button type="submit" disabled={submitting} className="font-bold disabled:opacity-60">
+              {submitting ? "저장 중..." : "등록 ▶"}
             </button>
           </div>
+        </form>
+        <div aria-hidden="true" className="mt-5 flex justify-center gap-2">
+          <span className="size-2 rounded-full bg-[#b8ad9d]" /><span className="size-2 rounded-full bg-[#b8ad9d]" /><span className="size-2 rounded-full bg-[#b8ad9d]" />
         </div>
-      </form>
+      </div>
     </main>
   );
 }

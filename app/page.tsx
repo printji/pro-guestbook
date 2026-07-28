@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { getMyPostIds, removeMyPostId, supabase, type Post } from "@/lib/supabase";
 
 const AVATAR_COLORS = [
-  { bg: "bg-[#ffd4e8]", text: "text-[#c83d83]", ring: "ring-[#ff9ccb]" },
-  { bg: "bg-[#e5d6ff]", text: "text-[#7652c9]", ring: "ring-[#c9adff]" },
-  { bg: "bg-[#d9f5ff]", text: "text-[#25799b]", ring: "ring-[#a8e6ff]" },
+  { bg: "bg-[#abc7be]", text: "text-[#234e48]" },
+  { bg: "bg-[#d7c7a2]", text: "text-[#695329]" },
+  { bg: "bg-[#c4d3a8]", text: "text-[#40582f]" },
 ];
 
 function initialsOf(name: string) {
@@ -29,7 +29,7 @@ function timeAgo(iso: string) {
 
 function PostSkeleton() {
   return (
-    <div className="glossy-card rounded-[26px] p-5 w-full flex flex-col gap-4">
+    <div className="lcd-line px-3 py-4 w-full flex flex-col gap-3">
       <div className="flex items-center gap-3">
         <div className="skeleton size-10 rounded-full shrink-0" />
         <div className="flex flex-col gap-2 flex-1">
@@ -91,29 +91,30 @@ export default function Home() {
   const isEmpty = posts !== null && posts.length === 0;
 
   return (
-    <main className="y2k-shell y2k-grid min-h-screen max-w-[430px] mx-auto relative pb-32 overflow-hidden">
-      <div aria-hidden="true" className="absolute -top-12 -right-16 size-44 rounded-full bg-[#f8b6dd]/40 blur-3xl" />
-      <div aria-hidden="true" className="absolute top-80 -left-20 size-40 rounded-full bg-[#cbb5ff]/35 blur-3xl" />
-
-      <header className="sticky top-0 z-10 px-5 pt-8 pb-4">
-        <div className="glossy-card rounded-[28px] px-5 py-4 flex items-center justify-between relative overflow-hidden">
-          <div aria-hidden="true" className="absolute -top-8 right-3 text-5xl opacity-25">✦</div>
-          <div>
-            <p className="text-[10px] font-extrabold tracking-[0.24em] text-[#b05a9b] uppercase">sweetest corner</p>
-            <h1 className="mt-0.5 text-[25px] font-black tracking-[-0.07em] leading-tight text-[#44234f]">pro&apos;s guest-book</h1>
+    <main className="phone-shell min-h-screen max-w-[430px] mx-auto relative px-4 py-7">
+      <div className="phone-frame min-h-[calc(100vh-56px)] rounded-[42px] px-4 pt-7 pb-5 flex flex-col">
+        <div aria-hidden="true" className="mx-auto mb-5 h-1.5 w-14 rounded-full bg-[#989082] shadow-inner" />
+        <section className="lcd-screen rounded-[7px] overflow-hidden flex-1 flex flex-col min-h-0">
+          <header className="bg-[#5a716a] px-3 py-1.5 flex items-center justify-between text-[#f6f8e9] font-mono text-[10px] tracking-wide">
+            <span>◉ 3G</span>
+            <span>GUEST-BOOK</span>
+            <span>17:25 ▰▰▰</span>
+          </header>
+          <div className="px-4 pt-4 pb-3 flex items-center justify-between border-b border-[#7c9785]">
+            <div>
+              <p className="font-mono text-[10px] tracking-[0.1em] text-[#597469]">MENU  ›  INBOX</p>
+              <h1 className="mt-1 text-[20px] leading-none font-black tracking-[-0.08em] text-[#284a42]">방명록</h1>
+            </div>
+            <span className="flex size-9 items-center justify-center rounded-full border-2 border-[#58796e] text-lg">✉</span>
           </div>
-          <span className="relative flex size-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff93c6] to-[#a984ef] text-xl shadow-[0_6px_14px_rgba(192,96,174,.28)]">♡</span>
-        </div>
-      </header>
-
-      <section className="relative px-5 pt-3 flex flex-col gap-4">
-        <div className="flex items-center justify-between px-1">
-          <h2 className="text-[12px] font-black tracking-[0.13em] uppercase text-[#8b5f91]">Lovely notes</h2>
-          <span className="rounded-full bg-white/60 px-3 py-1 text-[10px] font-bold text-[#a36a95] ring-1 ring-white/80">{posts?.length ?? 0} messages</span>
-        </div>
+          <div className="px-4 pt-3 flex items-center justify-between">
+            <h2 className="font-mono text-[11px] font-bold">받은 메시지</h2>
+            <span className="rounded-sm bg-[#99b8a6] px-1.5 py-0.5 font-mono text-[10px]">{posts?.length ?? 0}</span>
+          </div>
+          <div className="px-3 pt-2 pb-4 flex-1 overflow-y-auto">
 
         {error && (
-          <div className="rounded-[22px] border border-[#ffc4dc] bg-[#fff3f8] text-[#ca4e82] text-sm p-4">
+          <div className="border border-[#8c685d] bg-[#f2d9c5] text-[#734133] text-xs p-3 font-mono">
             메시지를 불러오지 못했어요: {error}
             <br />
             Supabase URL/anon key(.env.local)와 RLS 정책을 확인해 주세요.
@@ -121,7 +122,7 @@ export default function Home() {
         )}
 
         {isLoading && (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col">
             <PostSkeleton />
             <PostSkeleton />
           </div>
@@ -134,18 +135,18 @@ export default function Home() {
               return (
                 <article
                   key={post.id}
-                  className="glossy-card rounded-[26px] p-5 w-full flex flex-col gap-3 transition-transform duration-200 hover:-translate-y-0.5"
+                  className="lcd-line px-2.5 py-3 w-full flex flex-col gap-2 transition-colors hover:bg-[#c8dab8]"
                 >
                   <div className="flex items-start justify-between w-full">
                     <div className="flex items-center gap-3">
                       <div
-                        className={`size-11 rounded-2xl ring-2 ring-offset-2 ring-offset-[#fff4fc] flex items-center justify-center font-black text-sm shrink-0 ${color.bg} ${color.text} ${color.ring}`}
+                        className={`size-9 rounded-full border border-[#547168] flex items-center justify-center font-mono font-bold text-xs shrink-0 ${color.bg} ${color.text}`}
                       >
                         {initialsOf(post.name)}
                       </div>
                       <div className="flex flex-col">
-                        <span className="font-extrabold text-[15px] text-[#44234f]">{post.name}</span>
-                        <span className="text-[11px] font-medium text-[#a47c9e]">{timeAgo(post.created_at)}</span>
+                        <span className="font-mono font-bold text-[13px] text-[#284a42]">{post.name}</span>
+                        <span className="font-mono text-[10px] text-[#628075]">{timeAgo(post.created_at)}</span>
                       </div>
                     </div>
                     {myPostIds.includes(post.id) && (
@@ -154,13 +155,13 @@ export default function Home() {
                         aria-label="메시지 삭제"
                         onClick={() => handleDelete(post.id)}
                         disabled={deletingId === post.id}
-                        className="rounded-full bg-[#fff0f7] px-2.5 py-1 text-[10px] font-bold text-[#d36c9f] hover:bg-[#ffdce9] disabled:opacity-50 shrink-0"
+                        className="key-button rounded-sm px-2 py-0.5 text-[9px] font-mono font-bold text-[#564d42] disabled:opacity-50 shrink-0"
                       >
                         {deletingId === post.id ? "삭제 중..." : "삭제"}
                       </button>
                     )}
                   </div>
-                  <p className="text-sm font-medium text-[#654f69] leading-relaxed whitespace-pre-wrap">
+                  <p className="pl-12 text-[12px] font-mono leading-relaxed text-[#3d5d52] whitespace-pre-wrap">
                     {post.message}
                   </p>
                 </article>
@@ -170,31 +171,32 @@ export default function Home() {
         )}
 
         {isEmpty && (
-          <div className="glossy-card rounded-[28px] flex flex-col items-center text-center gap-2 py-10 px-6">
-            <div className="size-24 rounded-[30px] bg-gradient-to-br from-[#ffd0e7] to-[#d4c3ff] flex items-center justify-center mb-2 shadow-inner">
-              <span className="text-3xl sparkle">💌</span>
+          <div className="flex flex-col items-center text-center gap-2 py-10 px-6 font-mono">
+            <div className="size-16 rounded-full border-2 border-dashed border-[#668477] flex items-center justify-center mb-2">
+              <span className="text-2xl">✉</span>
             </div>
-            <h3 className="font-black text-base text-[#44234f]">첫 메시지를 기다리는 중!</h3>
-            <p className="text-sm font-medium text-[#9b7898] max-w-[220px]">
+            <h3 className="font-bold text-sm text-[#284a42]">새 메시지가 없습니다</h3>
+            <p className="text-xs text-[#628075] max-w-[220px]">
               Be the first to leave a warm message in the guestbook.
             </p>
             <Link
               href="/write"
-              className="mt-5 rounded-full bg-gradient-to-r from-[#fa75b3] to-[#a680e8] px-6 py-3 text-sm font-extrabold text-white shadow-[0_8px_18px_rgba(210,92,171,.28)]"
+              className="key-button mt-4 rounded-md px-5 py-2 text-xs font-mono font-bold text-[#33483f]"
             >
               Write a message
             </Link>
           </div>
         )}
-      </section>
-
-      <Link
-        href="/write"
-        aria-label="메시지 남기기"
-        className="fixed bottom-7 right-5 md:right-[calc(50%-195px)] size-[62px] rounded-[23px] bg-gradient-to-br from-[#ff79b6] via-[#ee77c5] to-[#aa83ed] shadow-[0_13px_24px_rgba(192,83,165,.35),inset_0_1px_0_rgba(255,255,255,.48)] flex items-center justify-center text-white text-2xl transition-transform hover:scale-105 active:scale-95"
-      >
-        ✏️
-      </Link>
+          </div>
+          <div className="mt-auto bg-[#5a716a] px-3 py-2 flex justify-between text-[#f6f8e9] font-mono text-[10px]">
+            <span>◀ MENU</span>
+            <Link href="/write" className="font-bold">작성 ▶</Link>
+          </div>
+        </section>
+        <div aria-hidden="true" className="mt-5 flex justify-center gap-2">
+          <span className="size-2 rounded-full bg-[#b8ad9d]" /><span className="size-2 rounded-full bg-[#b8ad9d]" /><span className="size-2 rounded-full bg-[#b8ad9d]" />
+        </div>
+      </div>
     </main>
   );
 }

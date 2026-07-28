@@ -4,8 +4,8 @@
 
 html,
 body {
-  background: #fff5fb;
-  color: #2b1736;
+  background: #d8d1c4;
+  color: #232b2e;
 }
 
 * {
@@ -13,31 +13,44 @@ body {
 }
 
 ::selection {
-  background: #ff9dcc;
-  color: #fff;
+  background: #9ebeb5;
+  color: #16302d;
 }
 
-.y2k-shell {
+.phone-shell {
   background:
-    radial-gradient(circle at 6% 8%, rgba(255, 255, 255, 0.95) 0 3%, transparent 14%),
-    radial-gradient(circle at 96% 22%, rgba(216, 184, 255, 0.75) 0 8%, transparent 25%),
-    radial-gradient(circle at 7% 72%, rgba(255, 199, 222, 0.85) 0 9%, transparent 27%),
-    linear-gradient(145deg, #fff7fd 0%, #fceeff 45%, #f2ebff 100%);
+    radial-gradient(circle at 13% 10%, rgba(255, 255, 255, 0.7) 0 2px, transparent 2.5px),
+    radial-gradient(circle at 82% 44%, rgba(134, 160, 151, 0.13) 0 1px, transparent 2px),
+    linear-gradient(135deg, #f5f0e6 0%, #e7ded0 100%);
+  background-size: 18px 18px, 15px 15px, auto;
 }
 
-.y2k-grid {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.46) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.46) 1px, transparent 1px);
-  background-size: 22px 22px;
+.phone-frame {
+  background: linear-gradient(145deg, #fdfbf5, #d8d1c5);
+  border: 1px solid #fffdf7;
+  box-shadow: 12px 16px 28px rgba(78, 71, 59, 0.21), inset 1px 1px 0 #fff, inset -2px -2px 0 rgba(137, 125, 108, 0.2);
 }
 
-.glossy-card {
-  background: linear-gradient(140deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.64));
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 12px 30px rgba(196, 95, 166, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+.lcd-screen {
+  background: #dce7c7;
+  border: 3px solid #68726b;
+  box-shadow: inset 0 0 0 2px #f1f5df, inset 0 0 20px rgba(70, 100, 75, 0.17);
+  color: #233b37;
 }
 
-.sparkle {
-  filter: drop-shadow(0 3px 4px rgba(186, 79, 160, 0.2));
+.lcd-line {
+  border-bottom: 1px dashed rgba(49, 80, 69, 0.28);
+}
+
+.key-button {
+  background: linear-gradient(180deg, #fcfaf4, #d9d0c1);
+  border: 1px solid #b9ad9b;
+  box-shadow: 0 3px 0 #9b907f, inset 0 1px 0 #fff;
+}
+
+.key-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #9b907f, inset 0 1px 0 #fff;
 }
 
 @keyframes shimmer {
@@ -50,7 +63,7 @@ body {
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #fbe7f4 0%, #f1dcfa 20%, #fbe7f4 40%, #fbe7f4 100%);
+  background: linear-gradient(90deg, #cad8b5 0%, #e3ecd0 20%, #cad8b5 40%, #cad8b5 100%);
   background-size: 400px 100%;
   animation: shimmer 1.4s ease infinite;
 }
