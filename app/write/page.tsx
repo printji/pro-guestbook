@@ -9,7 +9,6 @@ export default function WritePage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-  const [agree, setAgree] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,10 +20,6 @@ export default function WritePage() {
     // 관문: 이름 또는 메시지가 비어 있으면 저장하지 않는다 (입력값 유지)
     if (name.trim() === "" || message.trim() === "") {
       setError("이름과 한마디를 모두 입력해 주세요");
-      return;
-    }
-    if (!agree) {
-      setError("개인정보 수집 및 이용에 동의해 주세요");
       return;
     }
 
@@ -106,16 +101,6 @@ export default function WritePage() {
             <p className="text-xs text-accent font-medium flex items-center gap-1">⚠ 내용을 입력해주세요</p>
           )}
         </div>
-
-        <label className="flex items-center gap-3 py-2 px-1 cursor-pointer select-none">
-          <input
-            type="checkbox"
-            checked={agree}
-            onChange={(e) => setAgree(e.target.checked)}
-            className="size-6 rounded-md accent-primary"
-          />
-          <span className="text-[13px] text-gray-500">개인정보 수집 및 이용에 동의합니다</span>
-        </label>
 
         {error && !messageEmpty && (
           <p className="text-xs text-accent font-medium -mt-3">⚠ {error}</p>
