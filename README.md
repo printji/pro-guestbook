@@ -18,10 +18,11 @@ Day 1 워크북 Step 2에서 생성한 프로젝트입니다. Figma의 두 화�
 ### Step 4 — 환경 변수 연결
 
 1. Supabase 프로젝트의 **Project Settings → API** 에서 URL과 anon public key 복사
-2. `.env.local.example` 을 복사해 `.env.local` 로 이름 바꾸고 값 채우기
+2. 프로젝트 루트에 `.env.local` 파일을 만들고 아래 두 값을 채우기
 
    ```bash
-   cp .env.local.example .env.local
+   NEXT_PUBLIC_SUPABASE_URL=복사한 URL
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=복사한 anon public key
    ```
 
 3. 의존성 설치 후 로컬 실행
