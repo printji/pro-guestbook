@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { supabase, type Post } from "@/lib/supabase";
+import { getMyPostIds, removeMyPostId, supabase, type Post } from "@/lib/supabase";
 
 const AVATAR_COLORS = [
   { bg: "bg-primary/10", text: "text-primary" },
@@ -47,6 +47,8 @@ function PostSkeleton() {
 export default function Home() {
   const [posts, setPosts] = useState<Post[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [myPostIds, setMyPostIds] = useState<number[]>([]);
+  const [deletingId, setDeletingId] = useState<number | null>(null);
 
   async function loadPosts() {
     const { data, error } = await supabase
@@ -64,7 +66,25 @@ export default function Home() {
 
   useEffect(() => {
     loadPosts();
+    setMyPostIds(getMyPostIds());
   }, []);
+
+  async function handleDelete(id: number) {
+    if (!window.confirm("이 메시지를 삭제할까요?")) return;
+
+    setDeletingId(id);
+    const { error: deleteError } = await supabase.from("posts").delete().eq("id", id);
+    setDeletingId(null);
+
+    if (deleteError) {
+      window.alert(`삭제하지 못했어요: ${deleteError.message}`);
+      return;
+    }
+
+    removeMyPostId(id);
+    setMyPostIds((ids) => ids.filter((existingId) => existingId !== id));
+    setPosts((prev) => (prev ? prev.filter((post) => post.id !== id) : prev));
+  }
 
   const isLoading = posts === null;
   const isEmpty = posts !== null && posts.length === 0;
@@ -117,6 +137,17 @@ export default function Home() {
                         <span className="text-[11px] text-gray-500">{timeAgo(post.created_at)}</span>
                       </div>
                     </div>
+                    {myPostIds.includes(post.id) && (
+                      <button
+                        type="button"
+                        aria-label="메시지 삭제"
+                        onClick={() => handleDelete(post.id)}
+                        disabled={deletingId === post.id}
+                        className="text-xs text-gray-400 hover:text-accent disabled:opacity-50 shrink-0 px-1"
+                      >
+                        {deletingId === post.id ? "삭제 중..." : "삭제"}
+                      </button>
+                    )}
                   </div>
                   <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
                     {post.message}

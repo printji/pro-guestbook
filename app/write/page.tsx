@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
-import { supabase } from "@/lib/supabase";
+import { addMyPostId, supabase } from "@/lib/supabase";
 
 export default function WritePage() {
   const router = useRouter();
@@ -31,9 +31,11 @@ export default function WritePage() {
     setSubmitting(true);
     setError(null);
 
-    const { error: insertError } = await supabase
+    const { data: inserted, error: insertError } = await supabase
       .from("posts")
-      .insert({ name: name.trim(), message: message.trim() });
+      .insert({ name: name.trim(), message: message.trim() })
+      .select()
+      .single();
 
     setSubmitting(false);
 
@@ -42,6 +44,7 @@ export default function WritePage() {
       return;
     }
 
+    if (inserted) addMyPostId(inserted.id);
     router.push("/");
   }
 

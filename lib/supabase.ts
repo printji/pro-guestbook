@@ -18,3 +18,27 @@ export type Post = {
   message: string;
   created_at: string;
 };
+
+const MY_POST_IDS_KEY = "guestbook:my-post-ids";
+
+export function getMyPostIds(): number[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem(MY_POST_IDS_KEY);
+    return raw ? (JSON.parse(raw) as number[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function addMyPostId(id: number) {
+  if (typeof window === "undefined") return;
+  const ids = getMyPostIds();
+  window.localStorage.setItem(MY_POST_IDS_KEY, JSON.stringify([...ids, id]));
+}
+
+export function removeMyPostId(id: number) {
+  if (typeof window === "undefined") return;
+  const ids = getMyPostIds().filter((existingId) => existingId !== id);
+  window.localStorage.setItem(MY_POST_IDS_KEY, JSON.stringify(ids));
+}

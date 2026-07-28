@@ -17,3 +17,7 @@ create policy "Allow public read" on posts
 create policy "Allow public insert" on posts
   for insert
   with check (true);
+
+create policy "Allow public delete" on posts
+  for delete
+  using (true);
